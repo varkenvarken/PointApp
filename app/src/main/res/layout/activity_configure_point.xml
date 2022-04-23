@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintlayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ConfigurePoint">
+
+    <EditText
+        android:id="@+id/pointname"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        app:layout_constraintBottom_toTopOf="@id/horizontalScrollView"
+        app:layout_constraintEnd_toStartOf="@id/enable"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="PointName" />
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/enable"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:inputType="textPersonName"
+        android:text="Enable"
+        app:layout_constraintBottom_toTopOf="@id/horizontalScrollView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/pointname"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintBottom_toTopOf="@id/scrollView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pointname">
+
+        <LinearLayout
+            android:id="@+id/portlist"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/port0"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:minWidth="20dip"
+                android:text="0" />
+
+            <Button
+                android:id="@+id/port1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:minWidth="20dip"
+                android:text="1" />
+
+            <Button
+                android:id="@+id/port2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:minWidth="20dip"
+                android:text="2" />
+
+            <Button
+                android:id="@+id/port3"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:minWidth="20dip"
+                android:text="3" />
+
+            <Button
+                android:id="@+id/port4"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:minWidth="20dip"
+                android:text="4" />
+
+            <Button
+                android:id="@+id/port5"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:minWidth="20dip"
+                android:text="5" />
+
+            <Button
+                android:id="@+id/port6"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:minWidth="20dip"
+                android:text="6" />
+
+            <Button
+                android:id="@+id/port7"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:minWidth="20dip"
+                android:text="7" />
+
+            <Button
+                android:id="@+id/port8"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:minWidth="20dip"
+                android:text="8" />
+
+            <Button
+                android:id="@+id/port9"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:minWidth="20dip"
+                android:text="9" />
+
+            <Button
+                android:id="@+id/port10"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:minWidth="20dip"
+                android:text="10" />
+
+            <Button
+                android:id="@+id/port11"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:minWidth="20dip"
+                android:text="11" />
+
+            <Button
+                android:id="@+id/port12"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:minWidth="20dip"
+                android:text="12" />
+
+            <Button
+                android:id="@+id/port13"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:minWidth="20dip"
+                android:text="13" />
+
+            <Button
+                android:id="@+id/port14"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:minWidth="20dip"
+                android:text="14" />
+
+            <Button
+                android:id="@+id/port15"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:minWidth="20dip"
+                android:text="15" />
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/horizontalScrollView">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="0">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="6sp"
+                android:paddingRight="6sp">
+
+                <TextView
+                    android:id="@+id/label_left"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/amaranth"
+                    android:gravity="center_vertical"
+                    android:text="Left"
+                    android:textSize="20sp"
+                    android:tooltipText="The leftmost position of your point"
+                    android:typeface="normal" />
+
+                <ImageButton
+                    android:id="@+id/dec_left"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:adjustViewBounds="false"
+                    android:background="#00FFFFFF"
+                    android:cropToPadding="false"
+                    android:src="@android:drawable/btn_minus" />
+
+                <EditText
+                    android:id="@+id/value_left"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:digits="2"
+                    android:ems="5"
+                    android:fontFamily="@font/amaranth"
+                    android:gravity="center"
+                    android:inputType="numberDecimal"
+                    android:typeface="monospace" />
+
+                <ImageButton
+                    android:id="@+id/inc_left"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:adjustViewBounds="false"
+                    android:background="#00FFFFFF"
+                    android:cropToPadding="false"
+                    android:src="@android:drawable/btn_plus" />
+                android:text="+" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="6sp"
+                android:paddingRight="6sp">
+
+                <TextView
+                    android:id="@+id/label_right"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/amaranth"
+                    android:gravity="center_vertical"
+                    android:text="Right"
+                    android:textSize="20sp"
+                    android:tooltipText="The rightmost position of your point"
+                    android:typeface="normal" />
+
+                <ImageButton
+                    android:id="@+id/dec_right"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:adjustViewBounds="false"
+                    android:background="#00FFFFFF"
+                    android:cropToPadding="false"
+                    android:src="@android:drawable/btn_minus" />
+
+                <EditText
+                    android:id="@+id/value_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:digits="2"
+                    android:ems="5"
+                    android:fontFamily="@font/amaranth"
+                    android:gravity="center"
+                    android:inputType="numberDecimal"
+                    android:typeface="monospace" />
+
+                <ImageButton
+                    android:id="@+id/inc_right"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:adjustViewBounds="false"
+                    android:background="#00FFFFFF"
+                    android:cropToPadding="false"
+                    android:src="@android:drawable/btn_plus" />
+                android:text="+" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="6sp"
+                android:paddingRight="6sp">
+
+                <TextView
+                    android:id="@+id/label_mid"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/amaranth"
+                    android:gravity="center_vertical"
+                    android:text="Mid"
+                    android:textSize="20sp"
+                    android:tooltipText="The middle position of your point"
+                    android:typeface="normal" />
+
+                <ImageButton
+                    android:id="@+id/dec_mid"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:adjustViewBounds="false"
+                    android:background="#00FFFFFF"
+                    android:cropToPadding="false"
+                    android:src="@android:drawable/btn_minus" />
+
+                <EditText
+                    android:id="@+id/value_mid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:digits="2"
+                    android:ems="5"
+                    android:fontFamily="@font/amaranth"
+                    android:gravity="center"
+                    android:inputType="numberDecimal"
+                    android:typeface="monospace" />
+
+                <ImageButton
+                    android:id="@+id/inc_mid"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:adjustViewBounds="false"
+                    android:background="#00FFFFFF"
+                    android:cropToPadding="false"
+                    android:src="@android:drawable/btn_plus" />
+                android:text="+" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="6sp"
+                android:paddingRight="6sp">
+
+                <TextView
+                    android:id="@+id/label_speed"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/amaranth"
+                    android:gravity="center_vertical"
+                    android:text="Speed"
+                    android:textSize="20sp"
+                    android:tooltipText="The speed your point moves when switching in units/second"
+                    android:typeface="normal" />
+
+                <ImageButton
+                    android:id="@+id/dec_speed"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:adjustViewBounds="false"
+                    android:background="#00FFFFFF"
+                    android:cropToPadding="false"
+                    android:src="@android:drawable/btn_minus" />
+
+                <EditText
+                    android:id="@+id/value_speed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:digits="2"
+                    android:ems="5"
+                    android:fontFamily="@font/amaranth"
+                    android:gravity="center"
+                    android:inputType="numberDecimal"
+                    android:typeface="monospace" />
+
+                <ImageButton
+                    android:id="@+id/inc_speed"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:adjustViewBounds="false"
+                    android:background="#00FFFFFF"
+                    android:cropToPadding="false"
+                    android:src="@android:drawable/btn_plus" />
+                android:text="+" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="6sp"
+                android:paddingRight="6sp">
+
+                <TextView
+                    android:id="@+id/label_deltat"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/amaranth"
+                    android:gravity="center_vertical"
+                    android:text="Δt"
+                    android:textSize="20sp"
+                    android:tooltipText="The delay between steps when switching in seconds"
+                    android:typeface="normal" />
+
+                <ImageButton
+                    android:id="@+id/dec_deltat"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:adjustViewBounds="false"
+                    android:background="#00FFFFFF"
+                    android:cropToPadding="false"
+                    android:src="@android:drawable/btn_minus" />
+
+                <EditText
+                    android:id="@+id/value_deltat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:digits="3"
+                    android:ems="5"
+                    android:fontFamily="@font/amaranth"
+                    android:gravity="center"
+                    android:inputType="numberDecimal"
+                    android:typeface="monospace" />
+
+                <ImageButton
+                    android:id="@+id/inc_deltat"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:adjustViewBounds="false"
+                    android:background="#00FFFFFF"
+                    android:cropToPadding="false"
+                    android:src="@android:drawable/btn_plus" />
+                android:text="+" />
+            </TableRow>
+
+        </TableLayout>
+    </ScrollView>
+
+    <EditText
+        android:id="@+id/description"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:ems="10"
+        android:hint="Description"
+        android:inputType="textMultiLine"
+        app:layout_constraintBottom_toTopOf="@id/sync"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/scrollView2"
+        tools:text="Description" />
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/sync"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Sync"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/save"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/description" />
+
+    <Button
+        android:id="@+id/save"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/reset"
+        app:layout_constraintStart_toEndOf="@id/sync"
+        app:layout_constraintTop_toBottomOf="@id/description" />
+
+    <Button
+        android:id="@+id/reset"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Reset"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/delete"
+        app:layout_constraintStart_toEndOf="@id/save"
+        app:layout_constraintTop_toBottomOf="@id/description" />
+
+    <Button
+        android:id="@+id/delete"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Delete"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/reset"
+        app:layout_constraintTop_toBottomOf="@id/description" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="80dp"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@android:drawable/ic_input_add" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

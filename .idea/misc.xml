@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="app/src/main/res/font/amaranth.xml" value="0.3416666666666667" />
+        <entry key="app/src/main/res/layout/activity_configure_point.xml" value="0.12307692307692308" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/content_configure_point.xml" value="0.541025641025641" />
+        <entry key="app/src/main/res/layout/fragment_confirm_delete.xml" value="0.1" />
+        <entry key="app/src/main/res/xml/root_preferences.xml" value="0.2869791666666667" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
