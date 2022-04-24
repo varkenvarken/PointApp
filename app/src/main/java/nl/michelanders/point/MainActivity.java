@@ -91,6 +91,29 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
             TextView name = (TextView) row.getChildAt(1);
             ImageView img = (ImageView) row.getChildAt(2);
 
+            Log.d("configureButtons", p.pointtype + "_" + p.position());
+
+            if(p.pointtype.equals("left")){
+                Log.d("configureButtons left ", p.pointtype);
+
+                if(p.position().equals("left")){
+                    img.setImageResource(R.drawable.ic_left_left);
+                    Log.d("configureButtons exec ", "left:left");
+                } else{
+                    img.setImageResource(R.drawable.ic_left_straight);
+                    Log.d("configureButtons exec ", "left:straight");
+                }
+            }else if(p.pointtype.equals("right")){
+                Log.d("configureButtons not left ", p.pointtype);
+                if(p.position().equals("right")){
+                    img.setImageResource(R.drawable.ic_right_right);
+                    Log.d("configureButtons exec ", "right:right");
+                } else{
+                    img.setImageResource(R.drawable.ic_right_straight);
+                    Log.d("configureButtons exec ", "right_straight");
+                }
+            }
+
             row.setVisibility(View.VISIBLE);
             left.setOnClickListener(this);
             right.setOnClickListener(this);

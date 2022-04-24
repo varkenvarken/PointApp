@@ -28,4 +28,10 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="error_getting_points">Could not get list of points: %1$s</string>
     <string name="error_moving_point">Error moving point: %1$s</string>
+    <string name="error_deleting_point">Error deleting point</string>
+    <string name="error_deleting_last_point">Cannot delete last point in collection</string>
+    <string name="error_saving_point">Error saving point data</string>
+    <string name="error_adding_point">Error adding new point</string>
+    <string name="error_adding_too_many_point">Error adding point, no ports available</string>
+    <string name="error_retrieving_point">Error retrieving values for point</string>
 </resources>

@@ -11,12 +11,23 @@
         android:id="@+id/pointname"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:singleLine="true"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/horizontalScrollView"
-        app:layout_constraintEnd_toStartOf="@id/enable"
+        app:layout_constraintEnd_toStartOf="@id/pointtypespinner"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="PointName" />
+
+    <Spinner
+        android:id="@+id/pointtypespinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/horizontalScrollView"
+        app:layout_constraintEnd_toStartOf="@id/enable"
+        app:layout_constraintStart_toEndOf="@id/pointname"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.switchmaterial.SwitchMaterial
         android:id="@+id/enable"
@@ -26,7 +37,7 @@
         android:text="Enable"
         app:layout_constraintBottom_toTopOf="@id/horizontalScrollView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/pointname"
+        app:layout_constraintStart_toEndOf="@id/pointtypespinner"
         app:layout_constraintTop_toTopOf="parent" />
 
     <HorizontalScrollView
@@ -180,7 +191,7 @@
         android:id="@+id/scrollView2"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/description"
+        app:layout_constraintBottom_toTopOf="@id/defaultpositionspinner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/horizontalScrollView">
@@ -209,12 +220,12 @@
 
                 <ImageButton
                     android:id="@+id/dec_left"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:adjustViewBounds="false"
                     android:background="#00FFFFFF"
                     android:cropToPadding="false"
-                    android:src="@android:drawable/btn_minus" />
+                    android:src="@drawable/ic_minus" />
 
                 <EditText
                     android:id="@+id/value_left"
@@ -230,12 +241,13 @@
 
                 <ImageButton
                     android:id="@+id/inc_left"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:adjustViewBounds="false"
                     android:background="#00FFFFFF"
                     android:cropToPadding="false"
-                    android:src="@android:drawable/btn_plus" />
+                    android:paddingRight="10sp"
+                    android:src="@drawable/ic_plus" />
                 android:text="+" />
             </TableRow>
 
@@ -263,7 +275,7 @@
                     android:adjustViewBounds="false"
                     android:background="#00FFFFFF"
                     android:cropToPadding="false"
-                    android:src="@android:drawable/btn_minus" />
+                    android:src="@drawable/ic_minus" />
 
                 <EditText
                     android:id="@+id/value_right"
@@ -284,7 +296,8 @@
                     android:adjustViewBounds="false"
                     android:background="#00FFFFFF"
                     android:cropToPadding="false"
-                    android:src="@android:drawable/btn_plus" />
+                    android:paddingRight="10sp"
+                    android:src="@drawable/ic_plus" />
                 android:text="+" />
             </TableRow>
 
@@ -312,7 +325,7 @@
                     android:adjustViewBounds="false"
                     android:background="#00FFFFFF"
                     android:cropToPadding="false"
-                    android:src="@android:drawable/btn_minus" />
+                    android:src="@drawable/ic_minus" />
 
                 <EditText
                     android:id="@+id/value_mid"
@@ -333,7 +346,8 @@
                     android:adjustViewBounds="false"
                     android:background="#00FFFFFF"
                     android:cropToPadding="false"
-                    android:src="@android:drawable/btn_plus" />
+                    android:paddingRight="10sp"
+                    android:src="@drawable/ic_plus" />
                 android:text="+" />
             </TableRow>
 
@@ -361,7 +375,7 @@
                     android:adjustViewBounds="false"
                     android:background="#00FFFFFF"
                     android:cropToPadding="false"
-                    android:src="@android:drawable/btn_minus" />
+                    android:src="@drawable/ic_minus" />
 
                 <EditText
                     android:id="@+id/value_speed"
@@ -382,7 +396,8 @@
                     android:adjustViewBounds="false"
                     android:background="#00FFFFFF"
                     android:cropToPadding="false"
-                    android:src="@android:drawable/btn_plus" />
+                    android:paddingRight="10sp"
+                    android:src="@drawable/ic_plus" />
                 android:text="+" />
             </TableRow>
 
@@ -410,7 +425,7 @@
                     android:adjustViewBounds="false"
                     android:background="#00FFFFFF"
                     android:cropToPadding="false"
-                    android:src="@android:drawable/btn_minus" />
+                    android:src="@drawable/ic_minus" />
 
                 <EditText
                     android:id="@+id/value_deltat"
@@ -431,12 +446,33 @@
                     android:adjustViewBounds="false"
                     android:background="#00FFFFFF"
                     android:cropToPadding="false"
-                    android:src="@android:drawable/btn_plus" />
+                    android:paddingRight="10sp"
+                    android:src="@drawable/ic_plus" />
                 android:text="+" />
             </TableRow>
 
         </TableLayout>
     </ScrollView>
+
+    <TextView
+        android:id="@+id/defaultlabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="Default"
+        app:layout_constraintBottom_toTopOf="@id/description"
+        app:layout_constraintEnd_toStartOf="@id/defaultpositionspinner"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/scrollView2" />
+
+    <Spinner
+        android:id="@+id/defaultpositionspinner"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/defaultlabel"
+        app:layout_constraintTop_toBottomOf="@id/scrollView2" />
 
     <EditText
         android:id="@+id/description"
@@ -448,7 +484,7 @@
         app:layout_constraintBottom_toTopOf="@id/sync"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/scrollView2"
+        app:layout_constraintTop_toBottomOf="@id/defaultpositionspinner"
         tools:text="Description" />
 
     <com.google.android.material.switchmaterial.SwitchMaterial

@@ -5,6 +5,8 @@ import static java.lang.Math.abs;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Arrays;
+
 public class Point {
     public String name;
     public String index;
@@ -19,6 +21,25 @@ public class Point {
     public String _default; // default is a keyword in java
     public float deltat;
     public String pointtype;
+
+    static public String[] pointTypes = {"left", "right", "curved left",
+            "curved right", "wye"};
+
+    static public String[] defaultPositions = {"left", "right", "mid"};
+
+
+    public int pointtypeIndex(){
+        for(int i=0; i< pointTypes.length; i++){
+            if(pointTypes[i].equals(pointtype)){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public void setPointTypeIndex(int i){
+        pointtype = pointTypes[i];
+    }
 
     public String position() {
         String p = "left";

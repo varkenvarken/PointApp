@@ -53,7 +53,7 @@
                     android:id="@+id/imageview1"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    app:srcCompat="@android:drawable/btn_star" />
+                    app:srcCompat="@drawable/ic_left_left" />
 
                 <Button
                     android:id="@+id/buttonright1"

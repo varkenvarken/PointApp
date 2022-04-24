@@ -3,14 +3,15 @@ package nl.michelanders.point;
 import static java.lang.Double.max;
 import static java.lang.Double.min;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
-import androidx.fragment.app.DialogFragment;
 import androidx.preference.PreferenceManager;
 
-import android.content.DialogInterface;
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -18,42 +19,46 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.RadioGroup;
-import android.widget.Switch;
+import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 
 import nl.michelanders.point.databinding.ActivityConfigurePointBinding;
 
-public class ConfigurePoint extends AppCompatActivity {
+public class ConfigurePoint extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private ActivityConfigurePointBinding binding;
     private SharedPreferences sharedPreferences;
     private RequestQueue queue;
     private Point point;
-    private boolean[] freeports = new boolean[16];
-    private String pointindex;
-    private Gson gson = new Gson();;
+    private final boolean[] freePorts = new boolean[16];
+    private String pointIndex;
+    private final Gson gson = new Gson();
     private boolean syncing = false;
     private AlertDialog.Builder builder;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +76,7 @@ public class ConfigurePoint extends AppCompatActivity {
         queue = SingletonRequestQueue.getInstance(this.getApplicationContext()).
                 getRequestQueue();
         Intent intent = getIntent();
-        pointindex = intent.getStringExtra("pointindex");
+        pointIndex = intent.getStringExtra("pointindex");
 
         binding.pointname.addTextChangedListener(new TextWatcher() {
             @Override
@@ -108,6 +113,98 @@ public class ConfigurePoint extends AppCompatActivity {
         });
 
         builder = new AlertDialog.Builder(this);
+
+        Spinner pointTypeSpinner = (Spinner)findViewById(R.id.pointtypespinner);
+        pointTypeSpinner.setAdapter(new PointTypeAdapter(this, R.layout.row, Point.pointTypes));
+        pointTypeSpinner.setOnItemSelectedListener(this);
+
+        Spinner defaultPositionSpinner = (Spinner)findViewById(R.id.defaultpositionspinner);
+        defaultPositionSpinner.setAdapter(new PointDefaultPositionAdapter(this, R.layout.row, Point.defaultPositions));
+        defaultPositionSpinner.setOnItemSelectedListener(this);
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        if( adapterView.getId() == R.id.defaultpositionspinner){
+            point._default = Point.defaultPositions[i];
+        }else if ( adapterView.getId() == R.id.pointtypespinner) {
+            point.pointtype = Point.pointTypes[i];
+        }else{
+            Log.d("onItemSelected", adapterView.toString());
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {}
+
+    public class PointTypeAdapter extends ArrayAdapter<String> {
+
+        public PointTypeAdapter(Context context, int textViewResourceId,
+                                String[] objects) {
+            super(context, textViewResourceId, objects);
+        }
+
+        @Override
+        public View getDropDownView(int position, View convertView,
+                                    @NonNull ViewGroup parent) {
+            return getCustomView(position, convertView, parent);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            return getCustomView(position, convertView, parent);
+        }
+
+        public View getCustomView(int position, View convertView, ViewGroup parent) {
+            LayoutInflater inflater=getLayoutInflater();
+            View row=inflater.inflate(R.layout.row, parent, false);
+            TextView label=(TextView)row.findViewById(R.id.pointtype);
+            label.setText(Point.pointTypes[position]);
+
+            ImageView icon=(ImageView)row.findViewById(R.id.icon);
+
+            if (Point.pointTypes[position].equals("left")){
+                icon.setImageResource(R.drawable.ic_left);
+            } else if(Point.pointTypes[position].equals("right")){
+                icon.setImageResource(R.drawable.ic_right);
+            }
+            return row;
+        }
+    }
+
+    public class PointDefaultPositionAdapter extends ArrayAdapter<String> {
+
+        public PointDefaultPositionAdapter(Context context, int textViewResourceId,
+                                String[] objects) {
+            super(context, textViewResourceId, objects);
+        }
+
+        @Override
+        public View getDropDownView(int position, View convertView,
+                                    @NonNull ViewGroup parent) {
+            return getCustomView(position, convertView, parent);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            return getCustomView(position, convertView, parent);
+        }
+
+        public View getCustomView(int position, View convertView, ViewGroup parent) {
+            LayoutInflater inflater=getLayoutInflater();
+            View row=inflater.inflate(R.layout.row, parent, false);
+            TextView label=(TextView)row.findViewById(R.id.pointtype);
+            label.setText(Point.defaultPositions[position]);
+
+            ImageView icon=(ImageView)row.findViewById(R.id.icon);
+
+            if (Point.defaultPositions[position].equals("left")){
+                icon.setImageResource(R.drawable.ic_left);
+            } else if(Point.defaultPositions[position].equals("right")){
+                icon.setImageResource(R.drawable.ic_right);
+            }
+            return row;
+        }
     }
 
     @Override
@@ -126,111 +223,113 @@ public class ConfigurePoint extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
+        if(item.getItemId() == android.R.id.home) {
             // Respond to the action bar's Up/Home button
-            case android.R.id.home:
-                super.onBackPressed();
-                return true;
-            case R.id.settings:
-                startActivity(new Intent(this, SettingsActivity.class));
-                return true;
+            super.onBackPressed();
+            return true;
+        }
+        if(item.getItemId() ==  R.id.settings){
+            startActivity(new Intent(this, SettingsActivity.class));
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
     protected void getPoint(){
-        String TAG = "getPoint";
         String url = sharedPreferences.getString("serverurl", null);
         String username = sharedPreferences.getString("username", null);
         String password = sharedPreferences.getString("password", null);
 
         JsonObjectRequest jsonObjectRequest = new AuthJsonObjectRequest
-                (username, password, Request.Method.GET, url+"/point/"+ pointindex, null, new Response.Listener<JSONObject>() {
+                (username, password, Request.Method.GET, url+"/point/"+ pointIndex, null, response -> {
+                    Log.d("Response: ",response.toString());
 
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Log.d("Response: ",response.toString());
-
-                        try {
-                            point = gson.fromJson(response.getJSONObject("point").toString(), Point.class);
-                            JSONArray array = response.getJSONArray("freeports");
-                            for(int i=0; i<freeports.length;i++){freeports[i]=false;}
-                            for (int i=0; i< array.length(); i++){
-                                int fp = array.getInt(i);
-                                freeports[fp] = true;
-                            }
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                    try {
+                        point = gson.fromJson(response.getJSONObject("point").toString(), Point.class);
+                        JSONArray array = response.getJSONArray("freeports");
+                        Arrays.fill(freePorts, false);
+                        for (int i=0; i< array.length(); i++){
+                            int fp = array.getInt(i);
+                            freePorts[fp] = true;
                         }
-                        point.index = pointindex;
-                        configureLayout();
-                    }
 
-                }, new Response.ErrorListener() {
-
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.d("error retrieving point "+ pointindex, error.toString());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-                }){
+                    point.index = pointIndex;
+                    configureLayout();
+                }, error -> Toast.makeText(getApplicationContext(),getString(R.string.error_retrieving_point), Toast.LENGTH_LONG).show()){
         };
 
         queue.add(jsonObjectRequest);
     }
 
     protected void savePoint(){
-        String TAG = "savePoint";
         String url = sharedPreferences.getString("serverurl", null);
         String username = sharedPreferences.getString("username", null);
         String password = sharedPreferences.getString("password", null);
 
-        JSONObject body = null;
-        body = point.toJSON();
-        Log.d(TAG, body.toString());
+        JSONObject body = point.toJSON();
         JsonObjectRequest jsonObjectRequest = new AuthJsonObjectRequest
-                (username, password, Request.Method.PUT, url+"/point/"+ pointindex + "/save", body, new Response.Listener<JSONObject>() {
-
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Log.d("Response: ",response.toString());
-
-                        getPoint();
-                    }
-
-                }, new Response.ErrorListener() {
-
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.d("error saving point "+ pointindex, error.toString());
-                    }
-                }){
+                (username, password, Request.Method.PUT, url+"/point/"+ pointIndex + "/save", body, response -> getPoint(), error -> Toast.makeText(getApplicationContext(),getString(R.string.error_saving_point), Toast.LENGTH_LONG).show()){
         };
         jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(20000,0,1.0f));
         queue.add(jsonObjectRequest);
     }
 
     protected void deletePoint(){
-        String TAG = "deletePoint";
         String url = sharedPreferences.getString("serverurl", null);
         String username = sharedPreferences.getString("username", null);
         String password = sharedPreferences.getString("password", null);
 
         JsonObjectRequest jsonObjectRequest = new AuthJsonObjectRequest
-                (username, password, Request.Method.DELETE, url+"/point/"+ pointindex, null, new Response.Listener<JSONObject>() {
-
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Log.d("Response: ",response.toString());
-
-                        finish();
+                (username, password, Request.Method.DELETE, url+"/point/"+ pointIndex, null, response -> {
+                    // after a successful delete we return to the list of points
+                    finish();
+                }, error -> {
+                    if(error.networkResponse != null){
+                        switch(error.networkResponse.statusCode){
+                            case 403:Toast.makeText(getApplicationContext(),getString(R.string.error_deleting_last_point), Toast.LENGTH_LONG).show();
+                                    break;
+                            case 404:
+                            default:Toast.makeText(getApplicationContext(),getString(R.string.error_deleting_point), Toast.LENGTH_LONG).show();
+                        }
+                    }else{
+                        Toast.makeText(getApplicationContext(),getString(R.string.error_deleting_point), Toast.LENGTH_LONG).show();
                     }
+                }){
+        };
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(20000,0,1.0f));
+        jsonObjectRequest.setShouldRetryConnectionErrors(false);
+        queue.add(jsonObjectRequest);
+    }
 
-                }, new Response.ErrorListener() {
+    protected void addPoint(){
+        String url = sharedPreferences.getString("serverurl", null);
+        String username = sharedPreferences.getString("username", null);
+        String password = sharedPreferences.getString("password", null);
 
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.d("error deleting point "+ pointindex, error.toString());
+        JsonObjectRequest jsonObjectRequest = new AuthJsonObjectRequest
+                (username, password, Request.Method.POST, url+"/points/add", null, response -> {
+                    try {
+                        point = gson.fromJson(response.getJSONObject("point").toString(), Point.class);
+                        JSONArray array = response.getJSONArray("freeports");
+                        Arrays.fill(freePorts, false);
+                        for (int i=0; i< array.length(); i++){
+                            int fp = array.getInt(i);
+                            freePorts[fp] = true;
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    pointIndex = point.index;
+                    configureLayout();
+                }, error -> {
+                    if(error.networkResponse != null && error.networkResponse.statusCode == 409){
+                        Toast.makeText(getApplicationContext(),getString(R.string.error_adding_too_many_point), Toast.LENGTH_LONG).show();
+                    }else{
+                        Toast.makeText(getApplicationContext(),getString(R.string.error_adding_point), Toast.LENGTH_LONG).show();
                     }
                 }){
         };
@@ -238,63 +337,17 @@ public class ConfigurePoint extends AppCompatActivity {
         queue.add(jsonObjectRequest);
     }
 
-    protected void addPoint(){
-        String TAG = "addPoint";
-        String url = sharedPreferences.getString("serverurl", null);
-        String username = sharedPreferences.getString("username", null);
-        String password = sharedPreferences.getString("password", null);
-
-        JsonObjectRequest jsonObjectRequest = new AuthJsonObjectRequest
-                (username, password, Request.Method.POST, url+"/points/add", null, new Response.Listener<JSONObject>() {
-
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Log.d("Response: ",response.toString());
-                        try {
-                            point = gson.fromJson(response.getJSONObject("point").toString(), Point.class);
-                            JSONArray array = response.getJSONArray("freeports");
-                            for(int i=0; i<freeports.length;i++){freeports[i]=false;}
-                            for (int i=0; i< array.length(); i++){
-                                int fp = array.getInt(i);
-                                freeports[fp] = true;
-                            }
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        pointindex = point.index;
-                        configureLayout();
-                    }
-
-                }, error -> Log.d("error adding new point ", error.toString())){
-        };
-        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(20000,0,1.0f));
-        queue.add(jsonObjectRequest);
-    }
-
     protected void move(float v){
-        String TAG = "move";
         String url = sharedPreferences.getString("serverurl", null);
         String username = sharedPreferences.getString("username", null);
         String password = sharedPreferences.getString("password", null);
 
         if(syncing) {
             JsonObjectRequest jsonObjectRequest = new AuthJsonObjectRequest
-                    (username, password, Request.Method.PUT, url + "/point/" + pointindex + "/move/" + String.valueOf(v), null, new Response.Listener<JSONObject>() {
-
-                        @Override
-                        public void onResponse(JSONObject response) {
-                            Log.d("Response: ", response.toString());
-                            // we do not change anything in the layout
-                        }
-
-                    }, new Response.ErrorListener() {
-
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            Log.d("error moving point " + pointindex, error.toString());
-                        }
-                    }) {
+                    (username, password, Request.Method.PUT, url + "/point/" + pointIndex + "/move/" + v, null, response -> {
+                        Log.d("Response: ", response.toString());
+                        // we do not change anything in the layout
+                    }, error -> Toast.makeText(getApplicationContext(),getString(R.string.error_moving_point, ""), Toast.LENGTH_LONG).show()) {
             };
             jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(20000, 0, 1.0f));
             queue.add(jsonObjectRequest);
@@ -302,166 +355,106 @@ public class ConfigurePoint extends AppCompatActivity {
     }
 
 
+    @SuppressLint("DefaultLocale")
     protected void configureLayout(){
         binding.pointname.setText(point.name);
         // text change listeners are added in OnCreate
 
         binding.enable.setChecked(point.enabled);
-        binding.enable.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                point.enabled = ((SwitchCompat)view).isChecked();
-            }
-        });
+        binding.enable.setOnClickListener(view -> point.enabled = ((SwitchCompat)view).isChecked());
 
         for (int i=0; i<binding.portlist.getChildCount(); i++){
             Button button = (Button)binding.portlist.getChildAt(i);
             if(i == point.port){button.setBackgroundColor(Color.BLUE); button.setTextColor(Color.WHITE);}
             else{button.setBackgroundColor(Color.WHITE); button.setTextColor(Color.BLUE);}
 
-            button.setEnabled((i == point.port) || freeports[i]);
-            Log.d(String.valueOf(i), String.valueOf((i == point.port) || freeports[i]));
+            button.setEnabled((i == point.port) || freePorts[i]);
+            Log.d(String.valueOf(i), String.valueOf((i == point.port) || freePorts[i]));
             int finalI = i;
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    point.port = finalI;
-                    configureLayout();
-                }
+            button.setOnClickListener(view -> {
+                point.port = finalI;
+                configureLayout();
             });
         }
 
         binding.valueLeft.setText(String.format("%.2f",point._left));
-        binding.decLeft.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                point._left = (float)max(point._left - 0.01, -1.0);
-                move(point._left);
-                configureLayout();
-            }
+        binding.decLeft.setOnClickListener(view -> {
+            point._left = (float)max(point._left - 0.01, -1.0);
+            move(point._left);
+            configureLayout();
         });
-        binding.incLeft.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                point._left = (float)min(point._left + 0.01, 1.0);
-                move(point._left);
-                configureLayout();
-            }
+        binding.incLeft.setOnClickListener(view -> {
+            point._left = (float)min(point._left + 0.01, 1.0);
+            move(point._left);
+            configureLayout();
         });
 
         binding.valueRight.setText(String.format("%.2f",point._right));
-        binding.decRight.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                point._right = (float)max(point._right - 0.01, -1.0);
-                configureLayout();
-            }
+        binding.decRight.setOnClickListener(view -> {
+            point._right = (float)max(point._right - 0.01, -1.0);
+            configureLayout();
         });
-        binding.incRight.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                point._right = (float)min(point._right + 0.01, 1.0);
-                configureLayout();
-            }
+        binding.incRight.setOnClickListener(view -> {
+            point._right = (float)min(point._right + 0.01, 1.0);
+            configureLayout();
         });
 
         binding.valueMid.setText(String.format("%.2f",point._mid));
-        binding.decMid.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                point._mid = (float)max(point._mid - 0.01, -1.0);
-                configureLayout();
-            }
+        binding.decMid.setOnClickListener(view -> {
+            point._mid = (float)max(point._mid - 0.01, -1.0);
+            configureLayout();
         });
-        binding.incMid.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                point._mid = (float)min(point._mid + 0.01, 1.0);
-                configureLayout();
-            }
+        binding.incMid.setOnClickListener(view -> {
+            point._mid = (float)min(point._mid + 0.01, 1.0);
+            configureLayout();
         });
 
         binding.valueSpeed.setText(String.format("%.2f",point.speed));
-        binding.decSpeed.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                point.speed = (float)max(point.speed - 0.01, 0.0);
-                configureLayout();
-            }
+        binding.decSpeed.setOnClickListener(view -> {
+            point.speed = (float)max(point.speed - 0.01, 0.0);
+            configureLayout();
         });
-        binding.incSpeed.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                point.speed = (float)min(point.speed + 0.01, 2.0);
-                configureLayout();
-            }
+        binding.incSpeed.setOnClickListener(view -> {
+            point.speed = (float)min(point.speed + 0.01, 2.0);
+            configureLayout();
         });
 
         binding.valueDeltat.setText(String.format("%.3f",point.deltat));
-        binding.decDeltat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                point.deltat = (float)max(point.deltat - 0.005, 0.005);
-                configureLayout();
-            }
+        binding.decDeltat.setOnClickListener(view -> {
+            point.deltat = (float)max(point.deltat - 0.005, 0.005);
+            configureLayout();
         });
-        binding.incDeltat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                point.deltat = (float)min(point.deltat + 0.005, 0.1);
-                configureLayout();
-            }
+        binding.incDeltat.setOnClickListener(view -> {
+            point.deltat = (float)min(point.deltat + 0.005, 0.1);
+            configureLayout();
         });
 
-        binding.sync.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                syncing = ((SwitchCompat)view).isChecked();
-                Toast.makeText(getApplicationContext(),"Changes will be send to Point (if enabled)",Toast.LENGTH_SHORT).show();
-            }
+        binding.sync.setOnClickListener(view -> {
+            syncing = ((SwitchCompat)view).isChecked();
+            Toast.makeText(getApplicationContext(),"Changes will be send to Point (if enabled)",Toast.LENGTH_SHORT).show();
         });
 
-        binding.save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                savePoint();
-            }
-        });
-        binding.reset.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getPoint();
-            }
-        });
-        binding.delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                    builder.setMessage("Delete point forever?")
-                            .setTitle("Confirm delete");
-                    builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            Toast.makeText(getApplicationContext(),"Deleting point",Toast.LENGTH_SHORT).show();
-                            deletePoint();
-                        }
-                    });
-                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            // User cancelled the dialog
-                        }
-                    });
-                    AlertDialog dialog = builder.create();
+        binding.save.setOnClickListener(view -> savePoint());
+        binding.reset.setOnClickListener(view -> getPoint());
+        binding.delete.setOnClickListener(view -> {
+                builder.setMessage("Delete point forever?")
+                        .setTitle("Confirm delete");
+                builder.setPositiveButton("Delete", (dialog, id) -> {
+                    Toast.makeText(getApplicationContext(),"Deleting point",Toast.LENGTH_SHORT).show();
+                    deletePoint();
+                });
+                builder.setNegativeButton("Cancel", (dialog, id) -> {
+                    // User cancelled the dialog
+                });
+                AlertDialog dialog = builder.create();
 
-                    dialog.show();
+                dialog.show();
 
-            }
         });
 
-        binding.add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(),"Adding new point",Toast.LENGTH_SHORT).show();
-                addPoint();
-            }
+        binding.add.setOnClickListener(view -> {
+            Toast.makeText(getApplicationContext(),"Adding new point",Toast.LENGTH_SHORT).show();
+            addPoint();
         });
     }
 
