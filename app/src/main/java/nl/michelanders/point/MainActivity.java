@@ -70,6 +70,9 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
         if (item.getItemId() == R.id.settings){
             startActivity(new Intent(this, SettingsActivity.class));
             return true;
+        }else if (item.getItemId() == R.id.server){
+            startActivity(new Intent(this, ServerActivity.class));
+            return true;
         }else if (item.getItemId() == R.id.about){
             startActivity(new Intent(this, LicenseActivity.class));
             return true;

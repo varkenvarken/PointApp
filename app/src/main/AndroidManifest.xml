@@ -12,7 +12,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Point"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".ServerActivity"
+            android:exported="false" />
         <activity
             android:name=".LicenseActivity"
             android:exported="false" />

@@ -34,4 +34,6 @@
     <string name="error_adding_point">Error adding new point</string>
     <string name="error_adding_too_many_point">Error adding point, no ports available</string>
     <string name="error_retrieving_point">Error retrieving values for point</string>
+    <string name="error_retrieving_server_uptime">Error retrieving server uptime</string>
+    <string name="error_creating_backup">Error creating backup</string>
 </resources>

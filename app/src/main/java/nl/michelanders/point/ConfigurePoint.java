@@ -227,12 +227,16 @@ public class ConfigurePoint extends AppCompatActivity implements AdapterView.OnI
             // Respond to the action bar's Up/Home button
             super.onBackPressed();
             return true;
-        }
-        if(item.getItemId() ==  R.id.settings){
+        } else if (item.getItemId() == R.id.server) {
+            startActivity(new Intent(this, ServerActivity.class));
+            return true;
+        }else if(item.getItemId() ==  R.id.settings){
             startActivity(new Intent(this, SettingsActivity.class));
             return true;
-        }
-        return super.onOptionsItemSelected(item);
+        }else if (item.getItemId() == R.id.about) {
+            startActivity(new Intent(this, LicenseActivity.class));
+            return true;
+        }return super.onOptionsItemSelected(item);
     }
 
     protected void getPoint(){

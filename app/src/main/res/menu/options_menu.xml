@@ -5,6 +5,9 @@
         android:id="@+id/settings"
         android:title="Settings" />
     <item
+        android:id="@+id/server"
+        android:title="Server" />
+    <item
         android:id="@+id/about"
         android:title="About" />
 

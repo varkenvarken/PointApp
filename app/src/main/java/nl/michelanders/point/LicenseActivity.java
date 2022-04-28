@@ -43,15 +43,20 @@ public class LicenseActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
+        if(item.getItemId() == android.R.id.home) {
             // Respond to the action bar's Up/Home button
-            case android.R.id.home:
-                super.onBackPressed();
-                return true;
-            case R.id.settings:
-                startActivity(new Intent(this, SettingsActivity.class));
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
+            super.onBackPressed();
+            return true;
+        } else if (item.getItemId() == R.id.server) {
+            startActivity(new Intent(this, ServerActivity.class));
+            return true;
+        }else if(item.getItemId() ==  R.id.settings){
+            startActivity(new Intent(this, SettingsActivity.class));
+            return true;
+        }else if (item.getItemId() == R.id.about) {
+            startActivity(new Intent(this, LicenseActivity.class));
+            return true;
+        }return super.onOptionsItemSelected(item);
     }
+
 }
