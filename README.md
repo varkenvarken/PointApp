@@ -3,6 +3,8 @@ Android App to control RaspberryPI servos
 
 It connects to a simple REST service (available here: https://github.com/varkenvarken/Point )
 
+A bit more on these [GitHub pages](https://varkenvarken.github.io/PointApp/)
+
 ## Installation
 No real installation instructions, haven't put the app in the appstore (and probably never will).
 
