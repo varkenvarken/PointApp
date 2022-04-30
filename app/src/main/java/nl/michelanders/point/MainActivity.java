@@ -10,13 +10,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatImageButton;
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.preference.PreferenceManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -41,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
     private final List<Point> points = new ArrayList<>();
 
     Gson gson = new Gson();
+    private SwipeRefreshLayout swiperefreshlayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +56,8 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         queue = SingletonRequestQueue.getInstance(this.getApplicationContext()).
                 getRequestQueue();
+        swiperefreshlayout = binding.swiperefresh;
+        swiperefreshlayout.setOnRefreshListener(() -> retrieveListOfPoints());
     }
 
     @Override
@@ -87,10 +94,10 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
         for (ListIterator<Point> it = points.listIterator(); it.hasNext(); i++) {
             Point p = it.next();
 
-            TableRow row = (TableRow) binding.pointTable.getChildAt(i);
+            LinearLayout row = (LinearLayout) binding.pointTable.getChildAt(i);
 
-            Button left = (Button) row.getChildAt(0);
-            Button right = (Button) row.getChildAt(3);
+            AppCompatImageView left = (AppCompatImageView) row.getChildAt(0);
+            AppCompatImageView right = (AppCompatImageView) row.getChildAt(3);
             TextView name = (TextView) row.getChildAt(1);
             ImageView img = (ImageView) row.getChildAt(2);
 
@@ -125,14 +132,13 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
             name.setOnLongClickListener(this);
         }
         for (; i < binding.pointTable.getChildCount(); i++) {
-            TableRow row = (TableRow) binding.pointTable.getChildAt(i);
+            LinearLayout row = (LinearLayout) binding.pointTable.getChildAt(i);
             row.setVisibility(View.INVISIBLE);
         }
     }
 
     protected void retrieveListOfPoints(){
         String TAG = "retrieveListOfPoints";
-        Log.d(TAG, sharedPreferences.getString("serverurl", null));
         String url = sharedPreferences.getString("serverurl", null);
         String username = sharedPreferences.getString("username", null);
         String password = sharedPreferences.getString("password", null);
@@ -148,20 +154,22 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
                         } catch (JSONException e) {
                             Toast.makeText(getApplicationContext(),getString(R.string.error_getting_points, e.getMessage()), Toast.LENGTH_LONG).show();
                         }
-
                     }
+                    swiperefreshlayout.setRefreshing(false);
                     configureButtons();
-                }, error -> Toast.makeText(getApplicationContext(),getString(R.string.error_getting_points, error), Toast.LENGTH_LONG).show()){
-        };
+                }, error -> {
+                    swiperefreshlayout.setRefreshing(false);
+                    Toast.makeText(getApplicationContext(), getString(R.string.error_getting_points, error), Toast.LENGTH_LONG).show();
+                });
 
         queue.add(jsonObjectRequest);
     }
 
     @Override
     public void onClick(View view) {
-        TableRow row = (TableRow) view.getParent();
+        LinearLayout row = (LinearLayout) view.getParent();
         int i = row.indexOfChild(view);
-        TableLayout t = (TableLayout) row.getParent();
+        LinearLayout t = (LinearLayout) row.getParent();
         int r = t.indexOfChild(row);
 
         // moving a point may take considerable time, especially if the speed
@@ -200,8 +208,8 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
 
     @Override
     public boolean onLongClick(View view) {
-        TableRow row = (TableRow) view.getParent();
-        TableLayout t = (TableLayout) row.getParent();
+        LinearLayout row = (LinearLayout) view.getParent();
+        LinearLayout t = (LinearLayout) row.getParent();
         int r = t.indexOfChild(row);
         Intent intent = new Intent(this, ConfigurePoint.class);
         intent.putExtra("pointindex", points.get(r).index);

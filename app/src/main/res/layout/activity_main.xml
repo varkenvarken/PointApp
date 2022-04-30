@@ -17,8 +17,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ScrollView
-        android:id="@+id/scrollView3"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swiperefresh"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -26,106 +26,696 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TableLayout
-            android:id="@+id/point_table"
+    <ScrollView
+        android:id="@+id/scrollView3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+>
+
+        <LinearLayout
+            android:id="@+id/pointTable"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:stretchColumns="*">
+            android:orientation="vertical">
 
-            <TableRow
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <Button
-                    android:id="@+id/buttonleft1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:icon="@android:drawable/ic_media_rew"
-                    tools:ignore="SpeakableTextPresentCheck" />
-
-                <TextView
-                    android:id="@+id/name1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="TextView" />
+                android:layout_height="40dp"
+                android:layout_marginRight="4sp"
+                android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/imageview1"
+                    style="@style/Theme.Point.ImageViewAsButton"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_weight="0"
+                    android:scaleX="1.5"
+                    android:scaleY="1.5"
+                    app:srcCompat="@android:drawable/ic_media_previous" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="8dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/amaranth"
+                    android:gravity="center_vertical"
+                    android:text="TextView"
+                    android:textSize="20sp"
+                    tools:text="aaaaaaa" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0"
                     app:srcCompat="@drawable/ic_left_left" />
 
-                <Button
-                    android:id="@+id/buttonright1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:icon="@android:drawable/ic_media_ff"
-                    tools:ignore="SpeakableTextPresentCheck" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <Button
-                    android:id="@+id/buttonleft2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:icon="@android:drawable/ic_media_rew"
-                    tools:ignore="SpeakableTextPresentCheck" />
-
-                <TextView
-                    android:id="@+id/name2"
+                <ImageView
+                    style="@style/Theme.Point.ImageViewAsButton"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="TextView" />
+                    android:layout_weight="0"
+                    android:scaleX="1.5"
+                    android:scaleY="1.5"
+                    app:srcCompat="@android:drawable/ic_media_next" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginRight="4sp"
+                android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/imageview2"
+                    style="@style/Theme.Point.ImageViewAsButton"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    app:srcCompat="@android:drawable/btn_star" />
-
-                <Button
-                    android:id="@+id/buttonright2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:icon="@android:drawable/ic_media_ff"
-                    tools:ignore="SpeakableTextPresentCheck" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <Button
-                    android:id="@+id/buttonleft3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:icon="@android:drawable/ic_media_rew"
-                    tools:ignore="SpeakableTextPresentCheck" />
+                    android:layout_weight="0"
+                    android:scaleX="1.5"
+                    android:scaleY="1.5"
+                    app:srcCompat="@android:drawable/ic_media_previous" />
 
                 <TextView
-                    android:id="@+id/name3"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="TextView" />
+                    android:layout_marginLeft="8dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/amaranth"
+                    android:gravity="center_vertical"
+                    android:text="TextView"
+                    android:textSize="20sp"
+                    tools:text="aaaaaaa" />
 
                 <ImageView
-                    android:id="@+id/imageview3"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    app:srcCompat="@android:drawable/btn_star" />
+                    android:layout_weight="0"
+                    app:srcCompat="@drawable/ic_left_left" />
 
-                <Button
-                    android:id="@+id/buttonright3"
+                <ImageView
+                    style="@style/Theme.Point.ImageViewAsButton"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:icon="@android:drawable/ic_media_ff"
-                    tools:ignore="SpeakableTextPresentCheck" />
-            </TableRow>
+                    android:layout_height="match_parent"
+                    android:layout_weight="0"
+                    android:scaleX="1.5"
+                    android:scaleY="1.5"
+                    app:srcCompat="@android:drawable/ic_media_next" />
 
-        </TableLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginRight="4sp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    style="@style/Theme.Point.ImageViewAsButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0"
+                    android:scaleX="1.5"
+                    android:scaleY="1.5"
+                    app:srcCompat="@android:drawable/ic_media_previous" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="8dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/amaranth"
+                    android:gravity="center_vertical"
+                    android:text="TextView"
+                    android:textSize="20sp"
+                    tools:text="aaaaaaa" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0"
+                    app:srcCompat="@drawable/ic_left_left" />
+
+                <ImageView
+                    style="@style/Theme.Point.ImageViewAsButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0"
+                    android:scaleX="1.5"
+                    android:scaleY="1.5"
+                    app:srcCompat="@android:drawable/ic_media_next" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginRight="4sp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    style="@style/Theme.Point.ImageViewAsButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0"
+                    android:scaleX="1.5"
+                    android:scaleY="1.5"
+                    app:srcCompat="@android:drawable/ic_media_previous" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="8dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/amaranth"
+                    android:gravity="center_vertical"
+                    android:text="TextView"
+                    android:textSize="20sp"
+                    tools:text="aaaaaaa" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0"
+                    app:srcCompat="@drawable/ic_left_left" />
+
+                <ImageView
+                    style="@style/Theme.Point.ImageViewAsButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0"
+                    android:scaleX="1.5"
+                    android:scaleY="1.5"
+                    app:srcCompat="@android:drawable/ic_media_next" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginRight="4sp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    style="@style/Theme.Point.ImageViewAsButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0"
+                    android:scaleX="1.5"
+                    android:scaleY="1.5"
+                    app:srcCompat="@android:drawable/ic_media_previous" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="8dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/amaranth"
+                    android:gravity="center_vertical"
+                    android:text="TextView"
+                    android:textSize="20sp"
+                    tools:text="aaaaaaa" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0"
+                    app:srcCompat="@drawable/ic_left_left" />
+
+                <ImageView
+                    style="@style/Theme.Point.ImageViewAsButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0"
+                    android:scaleX="1.5"
+                    android:scaleY="1.5"
+                    app:srcCompat="@android:drawable/ic_media_next" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginRight="4sp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    style="@style/Theme.Point.ImageViewAsButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0"
+                    android:scaleX="1.5"
+                    android:scaleY="1.5"
+                    app:srcCompat="@android:drawable/ic_media_previous" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="8dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/amaranth"
+                    android:gravity="center_vertical"
+                    android:text="TextView"
+                    android:textSize="20sp"
+                    tools:text="aaaaaaa" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0"
+                    app:srcCompat="@drawable/ic_left_left" />
+
+                <ImageView
+                    style="@style/Theme.Point.ImageViewAsButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0"
+                    android:scaleX="1.5"
+                    android:scaleY="1.5"
+                    app:srcCompat="@android:drawable/ic_media_next" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginRight="4sp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    style="@style/Theme.Point.ImageViewAsButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0"
+                    android:scaleX="1.5"
+                    android:scaleY="1.5"
+                    app:srcCompat="@android:drawable/ic_media_previous" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="8dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/amaranth"
+                    android:gravity="center_vertical"
+                    android:text="TextView"
+                    android:textSize="20sp"
+                    tools:text="aaaaaaa" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0"
+                    app:srcCompat="@drawable/ic_left_left" />
+
+                <ImageView
+                    style="@style/Theme.Point.ImageViewAsButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0"
+                    android:scaleX="1.5"
+                    android:scaleY="1.5"
+                    app:srcCompat="@android:drawable/ic_media_next" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginRight="4sp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    style="@style/Theme.Point.ImageViewAsButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0"
+                    android:scaleX="1.5"
+                    android:scaleY="1.5"
+                    app:srcCompat="@android:drawable/ic_media_previous" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="8dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/amaranth"
+                    android:gravity="center_vertical"
+                    android:text="TextView"
+                    android:textSize="20sp"
+                    tools:text="aaaaaaa" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0"
+                    app:srcCompat="@drawable/ic_left_left" />
+
+                <ImageView
+                    style="@style/Theme.Point.ImageViewAsButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0"
+                    android:scaleX="1.5"
+                    android:scaleY="1.5"
+                    app:srcCompat="@android:drawable/ic_media_next" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginRight="4sp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    style="@style/Theme.Point.ImageViewAsButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0"
+                    android:scaleX="1.5"
+                    android:scaleY="1.5"
+                    app:srcCompat="@android:drawable/ic_media_previous" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="8dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/amaranth"
+                    android:gravity="center_vertical"
+                    android:text="TextView"
+                    android:textSize="20sp"
+                    tools:text="aaaaaaa" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0"
+                    app:srcCompat="@drawable/ic_left_left" />
+
+                <ImageView
+                    style="@style/Theme.Point.ImageViewAsButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0"
+                    android:scaleX="1.5"
+                    android:scaleY="1.5"
+                    app:srcCompat="@android:drawable/ic_media_next" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginRight="4sp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    style="@style/Theme.Point.ImageViewAsButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0"
+                    android:scaleX="1.5"
+                    android:scaleY="1.5"
+                    app:srcCompat="@android:drawable/ic_media_previous" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="8dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/amaranth"
+                    android:gravity="center_vertical"
+                    android:text="TextView"
+                    android:textSize="20sp"
+                    tools:text="aaaaaaa" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0"
+                    app:srcCompat="@drawable/ic_left_left" />
+
+                <ImageView
+                    style="@style/Theme.Point.ImageViewAsButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0"
+                    android:scaleX="1.5"
+                    android:scaleY="1.5"
+                    app:srcCompat="@android:drawable/ic_media_next" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginRight="4sp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    style="@style/Theme.Point.ImageViewAsButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0"
+                    android:scaleX="1.5"
+                    android:scaleY="1.5"
+                    app:srcCompat="@android:drawable/ic_media_previous" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="8dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/amaranth"
+                    android:gravity="center_vertical"
+                    android:text="TextView"
+                    android:textSize="20sp"
+                    tools:text="aaaaaaa" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0"
+                    app:srcCompat="@drawable/ic_left_left" />
+
+                <ImageView
+                    style="@style/Theme.Point.ImageViewAsButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0"
+                    android:scaleX="1.5"
+                    android:scaleY="1.5"
+                    app:srcCompat="@android:drawable/ic_media_next" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginRight="4sp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    style="@style/Theme.Point.ImageViewAsButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0"
+                    android:scaleX="1.5"
+                    android:scaleY="1.5"
+                    app:srcCompat="@android:drawable/ic_media_previous" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="8dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/amaranth"
+                    android:gravity="center_vertical"
+                    android:text="TextView"
+                    android:textSize="20sp"
+                    tools:text="aaaaaaa" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0"
+                    app:srcCompat="@drawable/ic_left_left" />
+
+                <ImageView
+                    style="@style/Theme.Point.ImageViewAsButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0"
+                    android:scaleX="1.5"
+                    android:scaleY="1.5"
+                    app:srcCompat="@android:drawable/ic_media_next" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginRight="4sp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    style="@style/Theme.Point.ImageViewAsButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0"
+                    android:scaleX="1.5"
+                    android:scaleY="1.5"
+                    app:srcCompat="@android:drawable/ic_media_previous" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="8dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/amaranth"
+                    android:gravity="center_vertical"
+                    android:text="TextView"
+                    android:textSize="20sp"
+                    tools:text="aaaaaaa" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0"
+                    app:srcCompat="@drawable/ic_left_left" />
+
+                <ImageView
+                    style="@style/Theme.Point.ImageViewAsButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0"
+                    android:scaleX="1.5"
+                    android:scaleY="1.5"
+                    app:srcCompat="@android:drawable/ic_media_next" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginRight="4sp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    style="@style/Theme.Point.ImageViewAsButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0"
+                    android:scaleX="1.5"
+                    android:scaleY="1.5"
+                    app:srcCompat="@android:drawable/ic_media_previous" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="8dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/amaranth"
+                    android:gravity="center_vertical"
+                    android:text="TextView"
+                    android:textSize="20sp"
+                    tools:text="aaaaaaa" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0"
+                    app:srcCompat="@drawable/ic_left_left" />
+
+                <ImageView
+                    style="@style/Theme.Point.ImageViewAsButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0"
+                    android:scaleX="1.5"
+                    android:scaleY="1.5"
+                    app:srcCompat="@android:drawable/ic_media_next" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginRight="4sp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    style="@style/Theme.Point.ImageViewAsButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0"
+                    android:scaleX="1.5"
+                    android:scaleY="1.5"
+                    app:srcCompat="@android:drawable/ic_media_previous" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="8dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/amaranth"
+                    android:gravity="center_vertical"
+                    android:text="TextView"
+                    android:textSize="20sp"
+                    tools:text="aaaaaaa" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0"
+                    app:srcCompat="@drawable/ic_left_left" />
+
+                <ImageView
+                    style="@style/Theme.Point.ImageViewAsButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0"
+                    android:scaleX="1.5"
+                    android:scaleY="1.5"
+                    app:srcCompat="@android:drawable/ic_media_next" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginRight="4sp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    style="@style/Theme.Point.ImageViewAsButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0"
+                    android:scaleX="1.5"
+                    android:scaleY="1.5"
+                    app:srcCompat="@android:drawable/ic_media_previous" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="8dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/amaranth"
+                    android:gravity="center_vertical"
+                    android:text="TextView"
+                    android:textSize="20sp"
+                    tools:text="aaaaaaa" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0"
+                    app:srcCompat="@drawable/ic_left_left" />
+
+                <ImageView
+                    style="@style/Theme.Point.ImageViewAsButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0"
+                    android:scaleX="1.5"
+                    android:scaleY="1.5"
+                    app:srcCompat="@android:drawable/ic_media_next" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
     </ScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

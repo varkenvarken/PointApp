@@ -369,10 +369,18 @@ public class ConfigurePoint extends AppCompatActivity implements AdapterView.OnI
 
         for (int i=0; i<binding.portlist.getChildCount(); i++){
             Button button = (Button)binding.portlist.getChildAt(i);
-            if(i == point.port){button.setBackgroundColor(Color.BLUE); button.setTextColor(Color.WHITE);}
-            else{button.setBackgroundColor(Color.WHITE); button.setTextColor(Color.BLUE);}
 
-            button.setEnabled((i == point.port) || freePorts[i]);
+            boolean enabled = (i == point.port) || freePorts[i];
+
+            if(i == point.port){
+                button.setBackgroundColor(Color.BLUE);
+                button.setTextColor(Color.WHITE);}
+            else{
+                button.setBackgroundColor(Color.WHITE);
+                button.setTextColor(enabled?Color.BLUE:Color.GRAY );
+            }
+            button.setEnabled(enabled);
+
             Log.d(String.valueOf(i), String.valueOf((i == point.port) || freePorts[i]));
             int finalI = i;
             button.setOnClickListener(view -> {
