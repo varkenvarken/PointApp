@@ -36,4 +36,8 @@
     <string name="error_retrieving_point">Error retrieving values for point</string>
     <string name="error_retrieving_server_uptime">Error retrieving server uptime</string>
     <string name="error_creating_backup">Error creating backup</string>
+    <string name="error_getting_backups">Could not get list of backups: %1$s</string>
+    <string name="error_restoring_backup">Error restoring backup</string>
+    <string name="backup_restored">backup restored</string>
+    <string name="backup_created">backup created</string>
 </resources>

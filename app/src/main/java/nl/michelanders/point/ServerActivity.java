@@ -78,6 +78,7 @@ public class ServerActivity extends AppCompatActivity {
 
                             getServerInfo();
                             getBackups();
+                            Toast.makeText(getApplicationContext(),getString(R.string.backup_created), Toast.LENGTH_SHORT).show();
                         }, error -> Toast.makeText(getApplicationContext(),getString(R.string.error_creating_backup), Toast.LENGTH_LONG).show()){
                 };
 
@@ -144,7 +145,6 @@ public class ServerActivity extends AppCompatActivity {
 
         JsonObjectRequest jsonObjectRequest = new AuthJsonObjectRequest
                 (username, password, Request.Method.GET, url+"/server/backups", null, response -> {
-                    Log.d("getBackups", response.toString());
                     List<Entry<String, String>> backups = new LinkedList<>();
 
                     for (Iterator<String> it = response.keys(); it.hasNext(); ) {
@@ -154,7 +154,7 @@ public class ServerActivity extends AppCompatActivity {
                             date = response.getString(index);
                             backups.add(new AbstractMap.SimpleEntry<String, String>(index, date));
                         } catch (JSONException e) {
-                            Toast.makeText(getApplicationContext(), getString(R.string.error_getting_points, e.getMessage()), Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), getString(R.string.error_getting_backups, e.getMessage()), Toast.LENGTH_LONG).show();
                         }
                     }
 
@@ -187,7 +187,8 @@ public class ServerActivity extends AppCompatActivity {
 
                                             getServerInfo();
                                             getBackups();
-                                        }, error -> Toast.makeText(getApplicationContext(),getString(R.string.error_creating_backup), Toast.LENGTH_LONG).show()){
+                                            Toast.makeText(getApplicationContext(),getString(R.string.backup_restored), Toast.LENGTH_SHORT).show();
+                                        }, error -> Toast.makeText(getApplicationContext(),getString(R.string.error_restoring_backup), Toast.LENGTH_LONG).show()){
                                 };
 
                                 queue.add(jsonObjectRequest);
@@ -198,7 +199,7 @@ public class ServerActivity extends AppCompatActivity {
                         TableRow row = (TableRow) binding.backupTable.getChildAt(i);
                         row.setVisibility(View.INVISIBLE);
                     }
-                }, error -> Toast.makeText(getApplicationContext(),getString(R.string.error_getting_points, error), Toast.LENGTH_LONG).show()){
+                }, error -> Toast.makeText(getApplicationContext(),getString(R.string.error_getting_backups, error), Toast.LENGTH_LONG).show()){
                 };
 
         queue.add(jsonObjectRequest);

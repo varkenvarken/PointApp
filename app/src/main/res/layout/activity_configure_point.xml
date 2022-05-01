@@ -7,43 +7,45 @@
     android:layout_height="match_parent"
     tools:context=".ConfigurePoint">
 
-    <EditText
-        android:id="@+id/pointname"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:id="@+id/linearlayouttop"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:background="@color/white"
-        android:singleLine="true"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/horizontalScrollView"
-        app:layout_constraintEnd_toStartOf="@id/pointtypespinner"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="PointName" />
-
-    <Spinner
-        android:id="@+id/pointtypespinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/horizontalScrollView"
-        app:layout_constraintEnd_toStartOf="@id/enable"
-        app:layout_constraintStart_toEndOf="@id/pointname"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.google.android.material.switchmaterial.SwitchMaterial
-        android:id="@+id/enable"
-        style="@style/Theme.Point.Switch"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginEnd="16dp"
-        android:inputType="textPersonName"
-        android:text="Enable"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@id/horizontalScrollView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/pointtypespinner"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/pointname"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:layout_weight="3"
+            android:background="@color/white"
+            android:singleLine="true"
+            android:textStyle="bold"
+            tools:text="PointName" />
+
+        <Spinner
+            android:id="@+id/pointtypespinner"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/enable"
+            style="@style/Theme.Point.Switch"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_weight="1"
+            android:inputType="textPersonName"
+            android:text="Enable" />
+    </LinearLayout>
 
     <HorizontalScrollView
         android:id="@+id/horizontalScrollView"
@@ -53,7 +55,7 @@
         app:layout_constraintBottom_toTopOf="@id/scrollView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pointname">
+        app:layout_constraintTop_toBottomOf="@+id/linearlayouttop">
 
         <LinearLayout
             android:id="@+id/portlist"
@@ -243,7 +245,7 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="16sp"
+                android:layout_marginTop="8dp"
                 android:paddingLeft="6sp">
 
                 <TextView
@@ -293,7 +295,7 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="16sp"
+                android:layout_marginTop="8dp"
                 android:paddingLeft="6sp">
 
                 <TextView
@@ -343,7 +345,7 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="16sp"
+                android:layout_marginTop="8dp"
                 android:paddingLeft="6sp">
 
                 <TextView
@@ -393,7 +395,7 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="16sp"
+                android:layout_marginTop="8dp"
                 android:paddingLeft="6sp">
 
                 <TextView
@@ -443,8 +445,8 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="16sp"
-                android:paddingLeft="6sp">
+                android:layout_marginTop="8dp"
+                android:paddingLeft="8dp">
 
                 <TextView
                     android:id="@+id/label_deltat"
@@ -498,7 +500,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:fontFamily="@font/amaranth"
         android:text="Default"
@@ -511,8 +513,8 @@
     <Spinner
         android:id="@+id/defaultpositionspinner"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_height="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintBottom_toTopOf="@id/description"
         app:layout_constraintEnd_toEndOf="parent"
@@ -537,7 +539,7 @@
     <com.google.android.material.switchmaterial.SwitchMaterial
         android:id="@+id/sync"
         style="@style/Theme.Point.Switch"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="Sync"
@@ -549,10 +551,10 @@
     <Button
         android:id="@+id/save"
         style="@style/Theme.Point.Button"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="1sp"
-        android:text="Save"
+        app:icon="@android:drawable/ic_menu_save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/reset"
         app:layout_constraintStart_toEndOf="@id/sync"
@@ -561,10 +563,10 @@
     <Button
         android:id="@+id/reset"
         style="@style/Theme.Point.Button"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="1sp"
-        android:text="Reset"
+        app:icon="@android:drawable/ic_menu_revert"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/delete"
         app:layout_constraintStart_toEndOf="@id/save"
@@ -573,11 +575,11 @@
     <Button
         android:id="@+id/delete"
         style="@style/Theme.Point.Button"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="1sp"
         android:layout_marginEnd="16dp"
-        android:text="Delete"
+        app:icon="@android:drawable/ic_delete"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/reset"

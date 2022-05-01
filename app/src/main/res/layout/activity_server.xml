@@ -10,9 +10,13 @@
         android:id="@+id/uptimeLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
         android:fontFamily="@font/amaranth"
         android:text="Uptime"
         android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/backup"
+        app:layout_constraintEnd_toStartOf="@+id/uptime"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -20,35 +24,37 @@
         android:id="@+id/uptime"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="87dp"
         android:fontFamily="@font/amaranth"
         android:text="TextView"
         android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/uptimeLabel"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/backup"
+        style="@style/Theme.Point.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="22dp"
         android:fontFamily="@font/amaranth"
         android:text="Backup"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/uptimeLabel" />
 
     <ScrollView
+        android:id="@+id/scrollView4"
         android:layout_width="409dp"
-        android:layout_height="619dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="2dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="162dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/backup">
+        app:layout_constraintTop_toBottomOf="@+id/uptime">
 
         <TableLayout
             android:id="@+id/backupTable"
@@ -62,6 +68,7 @@
 
                 <Button
                     android:id="@+id/restore1"
+                    style="@style/Theme.Point.Button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/amaranth"
@@ -89,6 +96,7 @@
 
                 <Button
                     android:id="@+id/restore2"
+                    style="@style/Theme.Point.Button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/amaranth"
@@ -116,6 +124,7 @@
 
                 <Button
                     android:id="@+id/restore3"
+                    style="@style/Theme.Point.Button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/amaranth"
@@ -143,6 +152,7 @@
 
                 <Button
                     android:id="@+id/restore4"
+                    style="@style/Theme.Point.Button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/amaranth"
@@ -170,6 +180,7 @@
 
                 <Button
                     android:id="@+id/restore5"
+                    style="@style/Theme.Point.Button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/amaranth"
@@ -197,6 +208,7 @@
 
                 <Button
                     android:id="@+id/restore6"
+                    style="@style/Theme.Point.Button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/amaranth"
@@ -224,6 +236,7 @@
 
                 <Button
                     android:id="@+id/restore7"
+                    style="@style/Theme.Point.Button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/amaranth"
@@ -251,6 +264,7 @@
 
                 <Button
                     android:id="@+id/restore8"
+                    style="@style/Theme.Point.Button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/amaranth"
@@ -278,6 +292,7 @@
 
                 <Button
                     android:id="@+id/restore9"
+                    style="@style/Theme.Point.Button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/amaranth"
@@ -305,6 +320,7 @@
 
                 <Button
                     android:id="@+id/restore10"
+                    style="@style/Theme.Point.Button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/amaranth"
